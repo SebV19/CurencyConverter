@@ -2,15 +2,16 @@
 
 int hello(){
 
-    fstream MoneyList("Exchange.csv", ios_base::app);
+    fstream MoneyList;
     MoneyList.open("Exchange.csv", ios::in);
 
     vector <string> row,row_comp;  
     string id, id_comp, amount, amount_comp, country, country_comp, currName, currName_comp;
     string search_id, search_id_comp;
 
-    int sell , buy;
+    int sell, buy;
     bool found_currency = false;
+
 
     cin>> search_id >> search_id_comp;
 
@@ -18,7 +19,7 @@ int hello(){
     {
             getline (MoneyList, amount, ',');
             getline (MoneyList, country, ',');
-            getline (MoneyList, country, '\n');
+            getline (MoneyList, currName, '\n');
 
                  if(id == search_id)
                 {        
@@ -29,13 +30,15 @@ int hello(){
                     row.push_back(currName);
                 }
 
-            }
+    }
+
+    found_currency = false;
 
     while (getline (MoneyList, id_comp, ',') && !found_currency)
     {
             getline (MoneyList, amount_comp, ',');
             getline (MoneyList, country_comp, ',');
-            getline (MoneyList, country_comp, '\n');
+            getline (MoneyList, currName_comp, '\n');
 
                  if(id_comp == search_id_comp)
                 {        
@@ -48,9 +51,6 @@ int hello(){
 
             }
 
-    //search id = row[0]
-
-    cout << row[0] << row[1];
-    cout << row_comp[0] << row_comp[1]; 
-
+    cout<<"da";
+    return 0;
 }
