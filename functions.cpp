@@ -1,6 +1,6 @@
 #include "functions.h"
 
-void findMoney(fstream &file, string searchID, vector<string> storage, string &id, string &amount, string &country, string &currName)
+void findMoney(fstream &file, string searchID, vector<string> &storage, string &id, string &amount, string &country, string &currName)
 {
     
     file.open("Exchange.csv", ios::in);
@@ -32,7 +32,6 @@ int hello()
 {
 
     fstream MoneyList;
-    MoneyList.open("Exchange.csv", ios::in);
 
     vector <string> row,row_comp;  
 
@@ -49,14 +48,13 @@ int hello()
     findMoney(MoneyList, search_id, row, id, amount, country, currName);
     findMoney(MoneyList, search_id_comp, row_comp, id_comp, amount_comp, country_comp, currName_comp);
 
-    cout << row.size();
-    // float hamn = stof(amount);
-    // float bamn =  stof(amount_comp);
-    // float final = (sell * bamn)/ hamn;
-    // cout << id << country << endl;
-    // cout << id_comp<< country_comp << endl;
-    // cout << "( " << sell << " x " << bamn << ") / " << hamn << " " <<final<<endl;
-    // cout<< search_id << sell << " is equal to " << search_id_comp << " " << final <<" .";
+    float hamn = stof(amount);
+    float bamn =  stof(amount_comp);
+    float final = (sell * bamn)/ hamn;
+    cout << id << country << endl;
+    cout << id_comp<< country_comp << endl;
+    cout << "( " << sell << " x " << bamn << ") / " << hamn << " " <<final<<endl;
+    cout<< search_id << sell << " is equal to " << search_id_comp << " " << final <<" .";
 
     return 0;
 }
