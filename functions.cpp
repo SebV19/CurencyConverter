@@ -1,5 +1,12 @@
 #include "functions.h"
 
+void display_vector(const vector<string> &v)
+{
+    for (auto i = v.begin();
+         i != v.end(); ++i)
+        cout << ',' << *i;
+}
+
 void findMoney(fstream &file, string searchID, vector<string> &storage, string &id, string &amount, string &country, string &currName)
 {
     
@@ -30,7 +37,6 @@ void findMoney(fstream &file, string searchID, vector<string> &storage, string &
 
 int hello()
 {
-
     fstream MoneyList;
 
     vector <string> row,row_comp;  
@@ -48,11 +54,14 @@ int hello()
     findMoney(MoneyList, search_id, row, id, amount, country, currName);
     findMoney(MoneyList, search_id_comp, row_comp, id_comp, amount_comp, country_comp, currName_comp);
 
+    display_vector(row);
+    display_vector(row_comp);
+
     float hamn = stof(amount);
     float bamn =  stof(amount_comp);
     float final = (sell * bamn)/ hamn;
-    cout << id << country << endl;
-    cout << id_comp<< country_comp << endl;
+    cout << id << country <<" "<< endl;
+    cout << id_comp<< country_comp << " " << endl;
     cout << "( " << sell << " x " << bamn << ") / " << hamn << " " <<final<<endl;
     cout<< search_id << sell << " is equal to " << search_id_comp << " " << final <<" .";
 
