@@ -8,6 +8,8 @@
 
 using namespace std;
 
+void display_vector();
+void findMoney();
 int hello();
 
 #endif

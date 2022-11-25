@@ -7,6 +7,23 @@ void display_vector(const vector<string> &v)
         cout << ',' << *i;
 }
 
+void readFile(ifstream &file, string &firstcountry, string &secondcountry, int &money)
+{
+
+    file.open("in.txt");
+
+    if(file.is_open())
+    {
+        file >> firstcountry >> secondcountry >> money;
+    }
+    
+    else
+    {
+        cout << "ERROR! FILE NOT FOUND!";
+    }
+
+}
+
 void findMoney(fstream &file, string searchID, vector<string> &storage, string &id, string &amount, string &country, string &currName)
 {
     
@@ -37,6 +54,8 @@ void findMoney(fstream &file, string searchID, vector<string> &storage, string &
 
 int hello()
 {
+    ofstream output("out.txt");
+    ifstream input("in.txt");
     fstream MoneyList;
 
     vector <string> row,row_comp;  
@@ -47,23 +66,21 @@ int hello()
     int sell;
     bool found_currency = false;
 
-    cout<<"What is the currency that you want to exchange?"; cin >> search_id; cout<<endl;
-    cout<<"What currency do you want?";cin >> search_id_comp; cout<<endl;
-    cout<<"How much "<<search_id<<" do you have?";cin >> sell; cout<<endl;
+    input.close();
+
+    readFile(input, search_id, search_id_comp, sell);
 
     findMoney(MoneyList, search_id, row, id, amount, country, currName);
     findMoney(MoneyList, search_id_comp, row_comp, id_comp, amount_comp, country_comp, currName_comp);
-
-    display_vector(row);
-    display_vector(row_comp);
+ 
 
     float hamn = stof(amount);
     float bamn =  stof(amount_comp);
     float final = (sell * bamn)/ hamn;
-    cout << id << country <<" "<< endl;
-    cout << id_comp<< country_comp << " " << endl;
-    cout << "( " << sell << " x " << bamn << ") / " << hamn << " " <<final<<endl;
-    cout<< search_id << sell << " is equal to " << search_id_comp << " " << final <<" .";
+
+
+    output << final;
+    output.close();
 
     return 0;
 }
