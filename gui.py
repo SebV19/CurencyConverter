@@ -1,30 +1,67 @@
-import PySimpleGUI as pg
+import PySimpleGUI as sg
 
-f = open("in.txt", 'w')
 
-pg.theme("DarkGreen5")
+def open_exchange_results():
 
-layout = [
+    f = open("out.txt", 'r')
+    result = f.readline()
 
-    [pg.Text("Choose your Currency: ")],
-    [pg.InputText()],
-    [pg.Text("Choose the Currency you want to buy:")],
-    [pg.InputText()],
-    [pg.Text("Amount of money you want to exchange: ")],
-    [pg.InputText()],
-    [pg.Button("Exchange!"), pg.Button("Cancel")]
-]
+    layout = [
 
-window = pg.Window("MoneyEchange", layout)
+        [sg.Text("You have exchanged your money:", key="new")], 
+        [sg.Text(result, size=(0, 1), key='OUTPUT')],
+        [sg.Button("Thank you, Bye!")]
 
-while True:
-    event, values = window.read()
-    if event == "Cancel":
-        break
-    lines = [values[0], values[1], values[2]]
-    with open('in.txt', 'w') as f:
-        for line in lines:
-            f.write(line)
-            f.write('\n')
+        ]
 
-window.close()
+    window = sg.Window("Second Window", layout, modal=True)
+    choice = None
+    while True:
+        event, values = window.read()
+        if event == "Thank you, Bye!":
+            break
+        
+    window.close()
+    f.close()
+
+
+
+def main():
+
+    f = open("in.txt", 'w')
+
+
+    sg.theme("DarkGreen5")
+
+    layout = [
+
+        [sg.Text("Choose your Currency: ")],
+        [sg.InputText()],
+        [sg.Text("Choose the Currency you want to buy:")],
+        [sg.InputText()],
+        [sg.Text("Amount of money you want to exchange: ")],
+        [sg.InputText()],
+        [sg.Button("Exchange!"), sg.Button("Cancel")]
+    ]
+
+    window = sg.Window("MoneyEchange", layout)
+
+    while True:
+        event, values = window.read()
+        if event == "Cancel":
+            break
+        lines = [values[0], values[1], values[2]]
+        with open('in.txt', 'w') as f:
+            for line in lines:
+                f.write(line)
+                f.write('\n')
+
+        if event == "Exchange!":
+            open_exchange_results()
+
+    window.close()
+
+if __name__ == "__main__":
+    main()
+
+    
