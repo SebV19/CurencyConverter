@@ -12,7 +12,7 @@ layout = [
     [pg.InputText()],
     [pg.Text("Amount of money you want to exchange: ")],
     [pg.InputText()],
-    [pg.Button("ok"), pg.Button("Cancel")]
+    [pg.Button("Exchange!"), pg.Button("Cancel")]
 ]
 
 window = pg.Window("MoneyEchange", layout)
